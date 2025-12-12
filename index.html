@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Rishabh Prajapati</title>
+    <meta
+      name="description"
+      content="Rishabh Prajapati — Frontend Developer specializing in React, Redux, and TailwindCSS. I build fast, clean, and user-centric web interfaces."
+    />
+    <link rel="canonical" href="https://yourdomain.com/" />
+
+    <meta name="author" content="Rishabh Prajapati" />
+    <meta name="robots" content="index, follow" />
+
+    <link rel="icon" type="image/svg" href="./assets/images/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <style>
+      @font-face {
+        font-family: "Gilroy";
+        src: url("./assets/fonts/Gilroy-Medium.woff2") format("woff2");
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      * {
+        margin: 0px;
+        padding: 0px;
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      :root {
+        --common-font: "Gilroy", sans-serif;
+        --primary-bg: #0e0e0e;
+        --primary-text: #f5f5f5;
+        --primary-padding: 1.5rem;
+        --primary-small-padding: 1rem;
+        --radius: 8px;
+        --transition: 0.2s ease;
+        --primary-width: 40rem;
+        --text-sm: 0.8rem;
+        --text-md: 1rem;
+        --text-lg: 1.2rem;
+        --text-2xl: 2rem;
+      }
+      .fade-up {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: all 0.6s ease-out;
+      }
+      .fade-up.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      li {
+        list-style: none;
+      }
+      a {
+        text-decoration: none;
+        color: white;
+      }
+      hr {
+        color: gray;
+      }
+      button {
+        border: none;
+        outline: none;
+      }
+      body {
+        width: 100%;
+        min-height: 100vh;
+        font-family: var(--common-font);
+        background: #0e0e0e;
+        color: #ffffff;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+      nav {
+        width: 100%;
+        height: 4rem;
+        position: sticky;
+        top: 1rem;
+        z-index: 50;
+        transition: var(--transition);
+      }
+      nav .nav-items {
+        padding: 0.5rem 2.5rem;
+        max-width: var(--primary-width);
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        gap: 3rem;
+        align-items: center;
+        margin-inline: auto;
+        background-color: #000000e5;
+        border-radius: 5rem;
+        backdrop-filter: blur(5px);
+      }
+      nav .nav-items .nav-links {
+        display: flex;
+        gap: 1rem;
+      }
+      nav .nav-items .nav-links a {
+        font-size: var(--text-lg);
+        transition: var(--transition);
+      }
+      nav .nav-items .nav-links a:hover {
+        text-decoration: underline;
+        color: gray;
+      }
+      nav .logo {
+        height: 3rem;
+      }
+      nav .nav-menu {
+        display: none;
+      }
+      nav .nav-menu .menu-icon {
+        height: 1.7rem;
+      }
+      nav .mobile-menu {
+        display: none;
+      }
+      nav .mobile-menu.open {
+        display: none;
+      }
+      main {
+        max-width: var(--primary-width);
+        margin-inline: auto;
+        padding: var(--primary-padding);
+      }
+      main .resume-btn {
+        background: white;
+        color: black;
+        padding: 0.5rem 1rem;
+        box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.288);
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        border: none;
+        transition: 0.2s ease;
+        position: fixed;
+        z-index: 100;
+        bottom: 0;
+        right: 0;
+        margin: 3rem;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+      }
+      @keyframes downloadBtnAnimation {
+        0% {
+          transform: translate(0px, -2px);
+        }
+        50% {
+          transform: translate(0px, 2px);
+        }
+        100% {
+          transform: translate(0px, -2px);
+        }
+      }
+      main .resume-btn img {
+        height: 1rem;
+        animation: downloadBtnAnimation 2.5s linear 0.1s infinite;
+      }
+      main .resume-btn:hover {
+        opacity: 0.8;
+      }
+      main .hero-section {
+        margin-top: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding-top: 4rem;
+        padding-bottom: 4rem;
+      }
+      main .hero-section .hero-top {
+        width: 100%;
+        margin-bottom: 2rem;
+      }
+      main .hero-name {
+        font-size: var(--text-lg);
+        line-height: 1.2rem;
+      }
+      main .hero-title {
+        font-size: 1rem;
+        color: gray;
+      }
+      main .hero-section .hero-desc {
+        font-size: 1.5rem;
+        line-height: 1.9rem;
+      }
+
+      /* project section */
+      #projects {
+        margin: 3rem 0rem;
+      }
+      #projects .projects-title {
+        font-size: var(--text-2xl);
+        margin-bottom: 1rem;
+      }
+      #projects .projects-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+      #projects .project-card {
+        width: 100%;
+        height: fit-content;
+        position: relative;
+        border-radius: 1.1rem;
+        overflow: hidden;
+      }
+      #projects .project-card:hover {
+        box-shadow: 0px 0px 10px rgba(255, 255, 255, 0.13);
+      }
+      #projects .project-card .project-image {
+        width: 100%;
+        height: auto;
+      }
+      #projects .project-card .project-content {
+        position: absolute;
+        background: #000000;
+        background: linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.92) 7%,
+          rgba(0, 0, 0, 0.65) 41%,
+          rgba(255, 255, 255, 0) 66%
+        );
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        inset: 0;
+        padding: 1rem;
+        z-index: 20;
+        transition: var(--transition);
+      }
+      .project-content:hover {
+        background: linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.92) 7%,
+          rgba(0, 0, 0, 0.65) 51%,
+          rgba(255, 255, 255, 0) 56%
+        );
+        transform: translate(0px, -5px);
+      }
+      .project-content .project-name {
+        font-size: var(--text-lg);
+        display: flex;
+        align-items: center;
+        gap: 0.2rem;
+        color: white;
+        font-weight: 600;
+      }
+      .project-content .project-desc {
+        color: #ebebeb;
+      }
+      #projects .project-tech {
+        display: flex;
+        flex-wrap: wrap;
+        margin-top: 0.5rem;
+        gap: 0.5rem;
+      }
+      .project-tech li {
+        padding: 0.2rem 0.5rem;
+        background-color: #5c5c5c90;
+        border-radius: 6px;
+        font-size: var(--text-sm);
+        white-space: nowrap;
+      }
+      #projects .project-link {
+        margin-top: 0.7rem;
+        display: flex;
+        gap: 1rem;
+      }
+      #projects .project-link a {
+        padding: 0.15rem 0.3rem;
+        background-color: #f5f5f5;
+        color: #000000;
+        border-radius: 5px;
+        font-size: var(--text-sm);
+        display: flex;
+        align-items: center;
+        gap: 0.2rem;
+        transition: var(--transition);
+      }
+      #projects .project-link a:hover {
+        opacity: 0.8;
+      }
+      #projects .project-link a img {
+        height: 1rem;
+      }
+      /* skills section */
+      #skills {
+        margin: 3rem 0rem;
+      }
+      #skills .skills-list {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        flex-wrap: wrap;
+        width: 100%;
+        gap: 1rem;
+      }
+      #skills h2 {
+        font-size: var(--text-2xl);
+        margin-bottom: 1.5rem;
+      }
+      #skills .skills-list li {
+        background: linear-gradient(135deg, #1a1a1a 0%, #0a0a0a 100%);
+        border: 1px solid #2a2a2a;
+        border-radius: 0.5rem;
+        padding: 1rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.2rem;
+        cursor: pointer;
+        text-align: center;
+      }
+      #skills .skills-list li:hover {
+        box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.13);
+      }
+      #skills .skills-list li img {
+        height: 2.5rem;
+        width: 2.5rem;
+        transition: var(--transition);
+      }
+      #skills .skills-list li:hover img {
+        transform: scale(1.15) rotate(5deg);
+      }
+      /* contact section */
+
+      #contact {
+        margin-top: 1rem;
+        text-align: center;
+      }
+      #contact h2 {
+        font-size: var(--text-2xl);
+        text-align: center;
+      }
+      #contact p {
+        margin-top: 1rem;
+        font-size: var(--text-md);
+        color: gray;
+        text-align: center;
+      }
+      #contact .social-links {
+        margin-top: 1.5rem;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        color: gray;
+      }
+      #contact .social-links a {
+        color: white;
+        padding-right: 0.5rem;
+        border-right: 1px solid gray;
+        transition: var(--transition);
+        cursor: pointer;
+      }
+      #contact .social-links a:hover {
+        text-decoration: underline;
+        color: gray;
+      }
+      #contact .social-links a:last-child {
+        border: none;
+      }
+      footer {
+        max-width: var(--primary-width);
+        margin-bottom: 4rem;
+        margin-inline: auto;
+        text-align: center;
+        padding: var(--primary-padding);
+      }
+
+      footer .copyright {
+        font-size: var(--text-sm);
+        font-style: italic;
+        color: gray;
+        text-align: center;
+      }
+      footer .know {
+        font-size: var(--text-sm);
+        text-align: center;
+      }
+      /* small screen */
+
+      @media screen and (max-width: 600px) {
+        nav {
+          top: 0rem;
+        }
+        nav .nav-items {
+          padding-inline: 1rem;
+          width: 100%;
+          border-radius: 0px;
+          justify-content: space-between;
+        }
+        nav .nav-items .nav-links {
+          display: none;
+        }
+        nav .nav-items .nav-menu {
+          display: flex;
+          background-color: transparent;
+        }
+        nav .mobile-menu {
+          display: none;
+          flex-direction: column;
+          gap: 1rem;
+          padding: 1.5rem;
+          background-color: #000000e5;
+          font-size: var(--text-lg);
+          border-radius: 1rem;
+          box-shadow: 0 0 10px #ffffff15;
+          backdrop-filter: blur(5px);
+        }
+        nav .mobile-menu.open {
+          display: flex;
+        }
+        /* main */
+        main {
+          padding: var(--primary-small-padding);
+        }
+        main .resume-btn {
+          margin: 1.2rem;
+        }
+        main .hero-section {
+          margin-top: 0rem;
+        }
+        main .hero-section .hero-desc {
+          max-width: 35rem;
+          font-size: 1.3rem;
+          line-height: 1.7rem;
+        }
+
+        /* project section */
+        #projects .projects-title {
+          font-size: 2rem;
+        }
+        #projects .project-card {
+          box-shadow: 0px 0px 5px #5c5c5c90;
+        }
+        #projects .project-card .project-content {
+          position: relative;
+          background: transparent;
+          padding: 0.7rem;
+        }
+        .project-content:hover {
+          background: transparent;
+          transform: none;
+        }
+        /* skills section */
+        #skills .skills-list {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          flex-wrap: wrap;
+          width: 100%;
+          gap: 0.5rem;
+        }
+        #skills .skills-list li {
+          padding: 0.5rem;
+        }
+        #skills .skills-list li img {
+          height: 1.7rem;
+          width: 1.7rem;
+          transition: var(--transition);
+        }
+        #skills .skills-list li:hover img {
+          transform: scale(1.15) rotate(5deg);
+        }
+        footer {
+          padding: var(--primary-small-padding);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- nav -->
+    <nav aria-label="Main navigation" class="fade-up">
+      <div class="nav-items">
+        <a href="#hero">
+          <img
+            class="logo"
+            src="./assets/images/logo.svg"
+            alt="Rishabh"
+            loading="lazy"
+          />
+        </a>
+        <div class="nav-links">
+          <a href="#hero">Home</a>
+          <a href="#projects">Projects</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <button class="nav-menu" aria-label="Open menu">
+          <img
+            class="menu-icon"
+            src="./assets/images/icons/menu.svg"
+            alt="Menu"
+            loading="lazy"
+          />
+        </button>
+      </div>
+      <div class="mobile-menu" id="mobileMenu">
+        <a href="#hero">Home</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+      </div>
+    </nav>
+
+    <main class="fade-up">
+      <a
+        href="https://drive.google.com/file/d/1bsg-qd5X_V-W4GbGyGSmYm55HX2jPqcf/view?usp=sharing"
+        target="_blank"
+        class="resume-btn"
+      >
+        Resume
+        <img
+          src="./assets/images/icons/download.svg"
+          alt="Download"
+          loading="lazy"
+        />
+      </a>
+      <!-- HERO  -->
+      <section id="hero" class="hero-section" aria-label="Hero">
+        <div class="hero-top">
+          <h1 class="hero-name">Rishabh Prajapati</h1>
+          <p class="hero-title">Frontend Developer</p>
+        </div>
+
+        <p class="hero-desc">
+          Hi 👋 — I’m Rishabh, a frontend developer focused on building fast,
+          clean, and user-centric interfaces. I care about code quality, smooth
+          UX, and turning complex ideas into simple, functional experiences.
+          <span style="color: grey">
+            Currently working with modern React, reusable components, and
+            polished product-level UI.
+          </span>
+        </p>
+      </section>
+
+      <!-- PROJECTS -->
+      <section id="projects" class="projects-section">
+        <h2 class="projects-title">Projects</h2>
+
+        <div class="projects-container">
+          <!-- PROJECT CARD -->
+          <div aria-label="StackCart" class="project-card">
+            <img
+              class="project-image"
+              src="./assets/images/project-stackcart.webp"
+              alt="StackCart Project Preview"
+              width="1057"
+              height="645"
+              loading="lazy"
+            />
+
+            <div class="project-content">
+              <h3 target="_blank" class="project-name">StackCart</h3>
+
+              <p class="project-desc">
+                A frontend focused e-commerce UI with smart filtering (category,
+                brand, rating, price range) and debounced search. Designed
+                reusable components including product cards, skeleton loaders,
+                and pagination to maintain clean, scalable code.
+              </p>
+
+              <ul class="project-tech">
+                <li>React</li>
+                <li>Redux Toolkit</li>
+                <li>TailwindCSS</li>
+              </ul>
+              <div class="project-link">
+                <a href="https://stackcart-sandy.vercel.app/" target="_blank"
+                  >Live Demo <img src="./assets/images/icons/link.svg" alt="->"
+                /></a>
+                <a
+                  href="https://github.com/rishabhprajapati03/StackCart"
+                  target="_blank"
+                  >Github <img src="./assets/images/icons/github.svg" alt="G"
+                /></a>
+              </div>
+            </div>
+          </div>
+
+          <div aria-label="Youvue Project" class="project-card">
+            <img
+              class="project-image"
+              src="./assets/images/project-youvue.webp"
+              alt="YouVue Project Preview"
+              width="1054"
+              height="643"
+              loading="lazy"
+            />
+
+            <div class="project-content">
+              <h3 target="_blank" class="project-name">YouVue</h3>
+
+              <p class="project-desc">
+                A YouTube clone with advanced search, caching, and infinite
+                scroll. Implemented debounced search with suggestion caching to
+                reduce API calls by 70%. Built a "Watch Later" feature and a
+                light/dark theme toggle for better UX.
+              </p>
+
+              <ul class="project-tech">
+                <li>React</li>
+                <li>Redux</li>
+                <li>TailwindCSS</li>
+                <li>YouTube Data API</li>
+              </ul>
+              <div class="project-link">
+                <a href="https://youvue.vercel.app/" target="_blank"
+                  >Live Demo <img src="./assets/images/icons/link.svg" alt="->"
+                /></a>
+                <a
+                  href="https://github.com/rishabhprajapati03/YouVue"
+                  target="_blank"
+                  >Github <img src="./assets/images/icons/github.svg" alt="G"
+                /></a>
+              </div>
+            </div>
+          </div>
+
+          <div aria-label="Tastyhub" class="project-card">
+            <img
+              class="project-image"
+              src="./assets/images/project-tastyhub.webp"
+              alt="TastyHub Project Preview"
+              width="1054"
+              height="643"
+              loading="lazy"
+              decoding="async"
+            />
+
+            <div class="project-content">
+              <h3 target="_blank" class="project-name">TastyHub</h3>
+
+              <p class="project-desc">
+                A Swiggy-inspired food delivery app built with real restaurant
+                data from Swiggy's public API. Focused on perfect UI replication
+                and smooth user flows with React Router, implementing search,
+                filters, and cart functionality. Designed for responsiveness
+                across all device sizes.
+              </p>
+
+              <ul class="project-tech">
+                <li>React</li>
+                <li>TailwindCSS</li>
+                <li>Redux</li>
+                <li>Swiggy API</li>
+              </ul>
+              <div class="project-link">
+                <a href="https://tastyhubfood.vercel.app/" target="_blank"
+                  >Live Demo <img src="./assets/images/icons/link.svg" alt="->"
+                /></a>
+                <a
+                  href="https://github.com/rishabhprajapati03/TastyHub"
+                  target="_blank"
+                  >Github <img src="./assets/images/icons/github.svg" alt="G"
+                /></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SKILLS -->
+      <section id="skills" aria-label="skills">
+        <h2>Things I am Good At</h2>
+        <ul class="skills-list">
+          <li><img src="./assets/images/icons/html.svg" alt="HTML" />HTML</li>
+          <li><img src="./assets/images/icons/css.svg" alt="CSS" />CSS</li>
+          <li>
+            <img
+              src="./assets/images/icons/tailwindcss.svg"
+              alt="TailwindCSS"
+            />
+            TailwindCSS
+          </li>
+          <li>
+            <img src="./assets/images/icons/javascript.svg" alt="JavaScript" />
+            JavaScript
+          </li>
+          <li>
+            <img src="./assets/images/icons/react.svg" alt="React" /> React
+          </li>
+          <li>
+            <img src="./assets/images/icons/redux.svg" alt="Redux" />Redux
+          </li>
+          <li>
+            <img src="./assets/images/icons/framer.svg" alt="Framer" /> Framer
+          </li>
+          <li><img src="./assets/images/icons/sql.svg" alt="SQL" /> SQL</li>
+        </ul>
+      </section>
+
+      <!-- CONTACT -->
+      <section id="contact">
+        <h2>Let's Connect</h2>
+        <p>
+          Want to collaborate, hire, or just talk? I'm open to good
+          conversations and interesting work.
+        </p>
+
+        <div class="social-links">
+          <a
+            href="https://www.linkedin.com/in/rishabhprajapati03/"
+            target="_blank"
+            >LinkedIn</a
+          >
+          <a href="https://github.com/rishabhprajapati03" target="_blank"
+            >GitHub</a
+          >
+          <a href="mailto:prajapatrishabh421@gmail.com" target="_blank"
+            >Email</a
+          >
+          <a
+            href="https://www.instagram.com/rishabhprajapati03/"
+            target="_blank"
+            >Instagram</a
+          >
+        </div>
+      </section>
+    </main>
+    <footer aria-label="Footer" class="fade-up">
+      <p class="copyright">© 2025 — Made by Rishabh</p>
+      <p class=".know">Made with patience, caffeine, and clean code.</p>
+    </footer>
+    <script>
+      const menuBtn = document.querySelector(".nav-menu");
+      const menuIcon = document.querySelector(".menu-icon");
+      const mobileMenu = document.getElementById("mobileMenu");
+
+      menuBtn.addEventListener("click", () => {
+        const isOpen = mobileMenu.classList.toggle("open");
+
+        // Swap icon
+        menuIcon.src = isOpen
+          ? "./assets/images/icons/close.svg"
+          : "./assets/images/icons/menu.svg";
+
+        menuIcon.alt = isOpen ? "Close menu" : "Open menu";
+      });
+
+      // transtion
+      window.addEventListener("load", () => {
+        document.querySelectorAll(".fade-up").forEach((el) => {
+          el.classList.add("show");
+        });
+      });
+    </script>
+  </body>
+</html>
